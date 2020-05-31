@@ -1883,10 +1883,10 @@ index 0000000..cdbdd17
 +/* Functions to be exported */
 diff --git a/src/video/n3ds/SDL_n3dsvideo.c b/src/video/n3ds/SDL_n3dsvideo.c
 new file mode 100644
-index 0000000..7f3560d
+index 0000000..504d52e
 --- /dev/null
 +++ b/src/video/n3ds/SDL_n3dsvideo.c
-@@ -0,0 +1,765 @@
+@@ -0,0 +1,768 @@
 +/*
 +    SDL - Simple DirectMedia Layer
 +    Copyright (C) 1997-2012 Sam Lantinga
@@ -2500,7 +2500,10 @@ index 0000000..7f3560d
 +	Uint32* palette = this->hidden->palette;
 +
 +	for (i = firstcolor; i < firstcolor + ncolors; i++)
-+		palette[i] = N3DS_MAP_RGB(colors[i].r, colors[i].g, colors[i].b);
++	{
++		int colorIndex = i - firstcolor;
++		palette[i] = N3DS_MAP_RGB(colors[colorIndex].r, colors[colorIndex].g, colors[colorIndex].b);
++	}
 +
 +	return(1);
 +}
